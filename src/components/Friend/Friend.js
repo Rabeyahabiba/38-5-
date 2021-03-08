@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Friends = (props) => {
-    const {name ,email} = props.friend;
+    const {name ,email, id} = props.friend;
     const friendStyle ={
         border : '1px solid purple',
         margin : '20px',
@@ -12,6 +13,9 @@ const Friends = (props) => {
         <div style ={friendStyle}>
             <h2> Name : {name}</h2>
             <p> email : {email} </p>
+             <Link to={`/friend/${id}`}> 
+             <button>Show Detail of :{id} </button>
+             </Link>
 
         </div>
     );

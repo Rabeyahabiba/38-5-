@@ -1,23 +1,38 @@
 
-import { fireEvent } from '@testing-library/dom';
-import { useEffect, useState } from 'react';
 import './App.css';
-import Friends from './components/Friends/Friends';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './components/Home/Home';
+import NoMatch from './NoMatch/NoMatch';
+import FriendDetail from './components/FriendDetail/FriendDetail';
+
+
 
 function App() {
-  const [ friends, setFriends] = useState ([]);
-  useEffect ( () => {
-      fetch ('https://jsonplaceholder.typicode.com/users')
-      .then (res => res.json())
-      .then (data => setFriends(data))
-  }, [])
+ 
   return (
-    <div >
-      <h4> Friends: {friends.length}</h4>
-      {
-        friends.map (friend => <Friends friend ={friend}></Friends>)
-      }
-    </div>
+    <Router >
+      <Switch>
+        <Route path ="/home">
+             <Home></Home>
+        </Route>
+        <Route path ="/friend/:friendId">
+          <FriendDetail></FriendDetail>
+        </Route>
+        <Route exact path ="/">
+             <Home/>
+        </Route>
+        <Route path ="*">
+          <NoMatch></NoMatch>
+             
+        </Route>
+      </Switch>
+      
+    </Router>
   );
 }
 
